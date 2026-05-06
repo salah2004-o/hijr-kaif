@@ -3,1027 +3,1203 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>معسلات حجر كيف — شارع الحراء، جدة</title>
+<title>حجر كيف — معسلات وتبغ | شارع الحراء، جدة</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;700&family=Cairo:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #0d0b08;
-    --surface: #141210;
-    --surface2: #1c1916;
-    --gold: #c8992a;
-    --gold-light: #e8b84b;
-    --gold-dim: #7a5a14;
-    --ember: #d4542a;
-    --smoke: #8a8070;
-    --cream: #f0e8d8;
-    --text: #e8dcc8;
-    --text-muted: #7a7060;
-    --border: rgba(200,153,42,0.18);
-  }
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'Tajawal', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    overflow-x: hidden;
-    cursor: default;
-  }
-
-  /* ─── NOISE TEXTURE OVERLAY ─── */
-  body::before {
-    content: '';
-    position: fixed; inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none; z-index: 9999; opacity: 0.4;
-  }
-
-  /* ─── SCROLLBAR ─── */
-  ::-webkit-scrollbar { width: 4px; }
-  ::-webkit-scrollbar-track { background: var(--bg); }
-  ::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 2px; }
-
-  /* ─── NAVBAR ─── */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 16px 32px;
-    background: linear-gradient(to bottom, rgba(13,11,8,0.98), rgba(13,11,8,0));
-    backdrop-filter: blur(2px);
-  }
-
-  .nav-logo {
-    font-family: 'Amiri', serif;
-    font-size: 22px;
-    color: var(--gold-light);
-    letter-spacing: 1px;
-  }
-
-  .nav-links {
-    display: flex; gap: 28px; list-style: none;
-    align-items: center;
-  }
-
-  .nav-links a {
-    color: var(--text-muted);
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 0.5px;
-    transition: color 0.3s;
-  }
-
-  .nav-links a:hover { color: var(--gold-light); }
-
-  .nav-cta {
-    background: var(--gold);
-    color: var(--bg) !important;
-    padding: 9px 20px;
-    border-radius: 4px;
-    font-weight: 700 !important;
-    transition: background 0.3s !important;
-  }
-  .nav-cta:hover { background: var(--gold-light) !important; color: var(--bg) !important; }
-
-  /* hamburger */
-  .hamburger {
-    display: none;
-    flex-direction: column; gap: 5px;
-    cursor: pointer; padding: 4px;
-  }
-  .hamburger span {
-    display: block; width: 24px; height: 2px;
-    background: var(--gold); border-radius: 2px;
-    transition: all 0.3s;
-  }
-
-  /* ─── HERO ─── */
-  .hero {
-    min-height: 100vh;
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    text-align: center;
-    padding: 120px 24px 80px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero-bg {
-    position: absolute; inset: 0; z-index: 0;
-    background:
-      radial-gradient(ellipse 60% 55% at 50% 40%, rgba(200,153,42,0.09) 0%, transparent 70%),
-      radial-gradient(ellipse 40% 30% at 80% 80%, rgba(212,84,42,0.06) 0%, transparent 60%),
-      radial-gradient(ellipse 50% 40% at 20% 60%, rgba(200,153,42,0.04) 0%, transparent 60%);
-  }
-
-  /* Smoke animation */
-  .smoke-wrap {
-    position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
-    width: 100%; height: 70%; pointer-events: none; z-index: 0;
-    opacity: 0.18;
-  }
-
-  .smoke-ring {
-    position: absolute;
-    border-radius: 50%;
-    border: 1px solid var(--gold);
-    animation: riseSmoke linear infinite;
-  }
-
-  @keyframes riseSmoke {
-    0%   { transform: translateY(0) scale(0.5); opacity: 0; }
-    20%  { opacity: 0.6; }
-    100% { transform: translateY(-300px) scale(2.5); opacity: 0; }
-  }
-
-  .hero-tag {
-    font-size: 11px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 20px;
-    position: relative; z-index: 1;
-    animation: fadeUp 0.8s ease both;
-  }
-
-  .hero-title {
-    font-family: 'Amiri', serif;
-    font-size: clamp(44px, 9vw, 96px);
-    line-height: 1.1;
-    color: var(--cream);
-    position: relative; z-index: 1;
-    animation: fadeUp 0.9s 0.1s ease both;
-  }
-
-  .hero-title span {
-    color: var(--gold-light);
-    display: block;
-  }
-
-  .hero-sub {
-    margin-top: 18px;
-    font-size: clamp(14px, 2vw, 18px);
-    color: var(--smoke);
-    font-weight: 300;
-    letter-spacing: 0.5px;
-    position: relative; z-index: 1;
-    animation: fadeUp 1s 0.2s ease both;
-  }
-
-  .hero-sub strong { color: var(--gold); font-weight: 500; }
-
-  .hero-actions {
-    margin-top: 40px;
-    display: flex; gap: 14px; flex-wrap: wrap; justify-content: center;
-    position: relative; z-index: 1;
-    animation: fadeUp 1s 0.35s ease both;
-  }
-
-  .btn-primary {
-    background: var(--gold);
-    color: var(--bg);
-    border: none;
-    padding: 14px 32px;
-    border-radius: 4px;
-    font-family: 'Tajawal', sans-serif;
-    font-size: 15px; font-weight: 700;
-    cursor: pointer; letter-spacing: 0.5px;
-    transition: all 0.3s;
-    display: flex; align-items: center; gap: 8px;
-    text-decoration: none;
-  }
-  .btn-primary:hover {
-    background: var(--gold-light);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(200,153,42,0.35);
-  }
-
-  .btn-outline {
-    background: transparent;
-    color: var(--text);
-    border: 1px solid var(--border);
-    padding: 14px 28px;
-    border-radius: 4px;
-    font-family: 'Tajawal', sans-serif;
-    font-size: 15px; font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s;
-    text-decoration: none;
-  }
-  .btn-outline:hover {
-    border-color: var(--gold);
-    color: var(--gold);
-  }
-
-  /* Scroll indicator */
-  .scroll-hint {
-    position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
-    z-index: 1;
-    display: flex; flex-direction: column; align-items: center; gap: 8px;
-    animation: fadeUp 1s 0.7s ease both;
-  }
-  .scroll-hint span { font-size: 10px; letter-spacing: 3px; color: var(--text-muted); }
-  .scroll-dot {
-    width: 1px; height: 40px;
-    background: linear-gradient(to bottom, var(--gold), transparent);
-    animation: scrollPulse 2s infinite;
-  }
-
-  @keyframes scrollPulse {
-    0%, 100% { opacity: 0.3; transform: scaleY(1); }
-    50% { opacity: 1; transform: scaleY(1.2); }
-  }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  /* ─── SECTION SHARED ─── */
-  section { padding: 80px 24px; }
-
-  .section-label {
-    font-size: 10px;
-    letter-spacing: 5px;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 12px;
-  }
-
-  .section-title {
-    font-family: 'Amiri', serif;
-    font-size: clamp(28px, 5vw, 48px);
-    color: var(--cream);
-    line-height: 1.2;
-  }
-
-  .section-desc {
-    margin-top: 12px;
-    color: var(--smoke);
-    font-size: 15px;
-    font-weight: 300;
-    max-width: 520px;
-  }
-
-  .container {
-    max-width: 1140px;
-    margin: 0 auto;
-  }
-
-  /* ─── DIVIDER ─── */
-  .gold-line {
-    width: 48px; height: 2px;
-    background: linear-gradient(to right, var(--gold), transparent);
-    margin: 20px 0;
-  }
-
-  /* ─── CATEGORIES / PRODUCTS ─── */
-  #products { background: var(--surface); }
-
-  .cats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2px;
-    margin-top: 52px;
-  }
-
-  .cat-card {
-    background: var(--bg);
-    padding: 40px 32px;
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.4s;
-    cursor: pointer;
-  }
-
-  .cat-card:hover { transform: translateY(-4px); }
-
-  .cat-card::before {
-    content: '';
-    position: absolute; top: 0; right: 0;
-    width: 120px; height: 120px;
-    border-radius: 50%;
-    background: radial-gradient(circle, var(--gold) 0%, transparent 70%);
-    opacity: 0.05;
-    transform: translate(30%, -30%);
-    transition: opacity 0.4s;
-  }
-  .cat-card:hover::before { opacity: 0.12; }
-
-  .cat-card::after {
-    content: '';
-    position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
-    background: linear-gradient(to right, var(--gold), transparent);
-    transform: scaleX(0); transform-origin: right;
-    transition: transform 0.4s;
-  }
-  .cat-card:hover::after { transform: scaleX(1); transform-origin: left; }
-
-  .cat-icon {
-    font-size: 36px;
-    margin-bottom: 20px;
-    display: block;
-    filter: grayscale(0.2);
-  }
-
-  .cat-name {
-    font-family: 'Amiri', serif;
-    font-size: 26px;
-    color: var(--cream);
-    margin-bottom: 8px;
-  }
-
-  .cat-en {
-    font-size: 10px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 14px;
-  }
-
-  .cat-desc {
-    font-size: 14px;
-    color: var(--smoke);
-    line-height: 1.8;
-    font-weight: 300;
-  }
-
-  .cat-items {
-    margin-top: 20px;
-    display: flex; flex-wrap: wrap; gap: 8px;
-  }
-
-  .tag {
-    font-size: 11px;
-    padding: 4px 12px;
-    border: 1px solid var(--border);
-    border-radius: 2px;
-    color: var(--text-muted);
-    letter-spacing: 0.5px;
-    transition: all 0.3s;
-  }
-  .cat-card:hover .tag {
-    border-color: rgba(200,153,42,0.35);
-    color: var(--gold);
-  }
-
-  /* ─── WHY US ─── */
-  #why {
-    background: var(--bg);
-    position: relative;
-    overflow: hidden;
-  }
-
-  #why::before {
-    content: '';
-    position: absolute; top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    width: 700px; height: 700px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(200,153,42,0.04) 0%, transparent 70%);
-    pointer-events: none;
-  }
-
-  .why-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 32px;
-    margin-top: 52px;
-  }
-
-  .why-card {
-    text-align: center;
-    padding: 32px 20px;
-    border: 1px solid var(--border);
-    border-radius: 2px;
-    transition: all 0.4s;
-    position: relative;
-  }
-  .why-card:hover {
-    border-color: var(--gold-dim);
-    background: rgba(200,153,42,0.03);
-  }
-
-  .why-icon { font-size: 32px; margin-bottom: 16px; display: block; }
-  .why-title { font-size: 17px; font-weight: 700; color: var(--cream); margin-bottom: 8px; }
-  .why-desc { font-size: 13px; color: var(--smoke); line-height: 1.8; font-weight: 300; }
-
-  /* ─── MAP / LOCATION ─── */
-  #location {
-    background: var(--surface);
-  }
-
-  .location-wrap {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 48px;
-    align-items: center;
-    margin-top: 52px;
-  }
-
-  .location-info { }
-
-  .location-item {
-    display: flex; align-items: flex-start; gap: 14px;
-    margin-bottom: 24px;
-  }
-  .loc-icon { font-size: 20px; color: var(--gold); margin-top: 2px; flex-shrink: 0; }
-  .loc-label { font-size: 11px; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; margin-bottom: 4px; }
-  .loc-val { font-size: 15px; color: var(--text); font-weight: 400; }
-
-  .map-box {
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    height: 280px;
-    display: flex; align-items: center; justify-content: center;
-    flex-direction: column; gap: 12px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .map-box::before {
-    content: '';
-    position: absolute; inset: 0;
-    background:
-      repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(200,153,42,0.04) 39px, rgba(200,153,42,0.04) 40px),
-      repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(200,153,42,0.04) 39px, rgba(200,153,42,0.04) 40px);
-  }
-
-  .map-pin {
-    width: 48px; height: 48px;
-    background: var(--gold);
-    border-radius: 50% 50% 50% 0;
-    transform: rotate(-45deg);
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 4px 20px rgba(200,153,42,0.5);
-    animation: pinPulse 2s infinite;
-    position: relative; z-index: 1;
-  }
-
-  .map-pin span { transform: rotate(45deg); font-size: 20px; }
-
-  @keyframes pinPulse {
-    0%, 100% { box-shadow: 0 4px 20px rgba(200,153,42,0.5); }
-    50% { box-shadow: 0 4px 40px rgba(200,153,42,0.9); }
-  }
-
-  .map-label {
-    font-size: 12px; color: var(--smoke); letter-spacing: 1px;
-    position: relative; z-index: 1;
-  }
-
-  .btn-map {
-    background: transparent;
-    border: 1px solid var(--gold);
-    color: var(--gold);
-    padding: 10px 24px;
-    border-radius: 3px;
-    font-family: 'Tajawal', sans-serif;
-    font-size: 13px; cursor: pointer;
-    transition: all 0.3s;
-    position: relative; z-index: 1;
-    text-decoration: none;
-    display: inline-block;
-  }
-  .btn-map:hover { background: var(--gold); color: var(--bg); }
-
-  /* ─── SOCIAL / CONTACT ─── */
-  #contact {
-    background: var(--bg);
-    text-align: center;
-  }
-
-  .contact-wrap {
-    max-width: 520px; margin: 0 auto;
-  }
-
-  .social-row {
-    display: flex; justify-content: center; gap: 16px;
-    margin-top: 36px; flex-wrap: wrap;
-  }
-
-  .social-btn {
-    display: flex; align-items: center; gap: 10px;
-    padding: 14px 28px;
-    border-radius: 4px;
-    font-family: 'Tajawal', sans-serif;
-    font-size: 14px; font-weight: 600;
-    text-decoration: none;
-    transition: all 0.35s;
-    border: none; cursor: pointer;
-  }
-
-  .social-btn svg { width: 20px; height: 20px; fill: currentColor; }
-
-  .wa { background: #1a3a28; color: #25d366; border: 1px solid rgba(37,211,102,0.3); }
-  .wa:hover { background: #25d366; color: #fff; box-shadow: 0 6px 24px rgba(37,211,102,0.35); transform: translateY(-2px); }
-
-  .ig { background: #2a1828; color: #e1306c; border: 1px solid rgba(225,48,108,0.3); }
-  .ig:hover { background: linear-gradient(135deg, #e1306c, #fd1d1d, #fcb045); color: #fff; transform: translateY(-2px); }
-
-  .sn { background: #1a2a2a; color: #fffc00; border: 1px solid rgba(255,252,0,0.2); }
-  .sn:hover { background: #fffc00; color: #000; transform: translateY(-2px); box-shadow: 0 6px 24px rgba(255,252,0,0.3); }
-
-  /* ─── FOOTER ─── */
-  footer {
-    background: var(--surface);
-    border-top: 1px solid var(--border);
-    padding: 32px 24px;
-    text-align: center;
-  }
-
-  .footer-logo {
-    font-family: 'Amiri', serif;
-    font-size: 22px;
-    color: var(--gold-light);
-    margin-bottom: 10px;
-  }
-
-  .footer-sub {
-    font-size: 12px; color: var(--text-muted); letter-spacing: 1px;
-  }
-
-  /* ─── FLOATING WHATSAPP ─── */
-  .float-wa {
-    position: fixed; bottom: 28px; left: 28px; z-index: 999;
-    width: 56px; height: 56px;
-    background: #25d366;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 4px 20px rgba(37,211,102,0.5);
-    animation: waFloat 3s ease-in-out infinite;
-    text-decoration: none;
-    transition: transform 0.3s;
-  }
-  .float-wa:hover { transform: scale(1.12); }
-  .float-wa svg { width: 28px; height: 28px; fill: white; }
-
-  @keyframes waFloat {
-    0%, 100% { box-shadow: 0 4px 20px rgba(37,211,102,0.5); }
-    50% { box-shadow: 0 6px 36px rgba(37,211,102,0.8); }
-  }
-
-  /* ─── ADMIN PANEL ─── */
-  #admin-toggle {
-    position: fixed; bottom: 28px; right: 28px; z-index: 1000;
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    color: var(--gold);
-    width: 44px; height: 44px;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    cursor: pointer; font-size: 18px;
-    transition: all 0.3s;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.6);
-  }
-  #admin-toggle:hover { background: var(--gold); color: var(--bg); }
-
-  #admin-panel {
-    position: fixed; top: 0; right: -400px; bottom: 0;
-    width: 380px; max-width: 100vw;
-    background: var(--surface);
-    border-left: 1px solid var(--border);
-    z-index: 1001;
-    overflow-y: auto;
-    transition: right 0.4s cubic-bezier(.4,0,.2,1);
-    padding: 24px;
-    box-shadow: -12px 0 48px rgba(0,0,0,0.8);
-  }
-
-  #admin-panel.open { right: 0; }
-
-  .admin-header {
-    display: flex; align-items: center; justify-content: space-between;
-    margin-bottom: 28px;
-    padding-bottom: 16px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .admin-title {
-    font-family: 'Amiri', serif;
-    font-size: 20px; color: var(--gold-light);
-  }
-
-  .admin-close {
-    background: none; border: none;
-    color: var(--text-muted); font-size: 20px;
-    cursor: pointer; padding: 4px;
-    transition: color 0.3s;
-  }
-  .admin-close:hover { color: var(--ember); }
-
-  .admin-section {
-    margin-bottom: 28px;
-    padding-bottom: 28px;
-    border-bottom: 1px solid rgba(200,153,42,0.08);
-  }
-
-  .admin-section-title {
-    font-size: 11px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 16px;
-  }
-
-  .field-group { margin-bottom: 14px; }
-
-  .field-label {
-    display: block;
-    font-size: 12px; color: var(--smoke);
-    margin-bottom: 6px; letter-spacing: 0.5px;
-  }
-
-  .field-input {
-    width: 100%;
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 3px;
-    padding: 10px 12px;
-    color: var(--text);
-    font-family: 'Tajawal', sans-serif;
-    font-size: 14px;
-    outline: none;
-    transition: border-color 0.3s;
-    direction: rtl;
-  }
-  .field-input:focus { border-color: var(--gold); }
-
-  .field-toggle {
-    display: flex; align-items: center; gap: 10px;
-    margin-bottom: 12px;
-  }
-
-  .toggle-sw {
-    position: relative; width: 40px; height: 22px; flex-shrink: 0;
-  }
-  .toggle-sw input { opacity: 0; width: 0; height: 0; }
-  .toggle-sw-slider {
-    position: absolute; inset: 0;
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 22px;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
-  .toggle-sw-slider::before {
-    content: '';
-    position: absolute; top: 2px; right: 2px;
-    width: 16px; height: 16px;
-    background: var(--smoke); border-radius: 50%;
-    transition: all 0.3s;
-  }
-  .toggle-sw input:checked + .toggle-sw-slider { background: var(--gold-dim); border-color: var(--gold); }
-  .toggle-sw input:checked + .toggle-sw-slider::before { right: calc(100% - 18px); background: var(--gold-light); }
-
-  .toggle-label { font-size: 13px; color: var(--text); }
-
-  .admin-save {
-    width: 100%;
-    background: var(--gold);
-    color: var(--bg);
-    border: none;
-    padding: 12px;
-    border-radius: 3px;
-    font-family: 'Tajawal', sans-serif;
-    font-size: 14px; font-weight: 700;
-    cursor: pointer; letter-spacing: 0.5px;
-    transition: all 0.3s; margin-top: 8px;
-  }
-  .admin-save:hover { background: var(--gold-light); }
-
-  .admin-preview-note {
-    font-size: 11px; color: var(--text-muted);
-    text-align: center; margin-top: 10px; letter-spacing: 0.5px;
-  }
-
-  /* ─── MOBILE ─── */
-  @media (max-width: 768px) {
-    nav { padding: 14px 20px; }
-    .nav-links { display: none; flex-direction: column; position: fixed; top: 0; right: 0; bottom: 0; width: 70%; background: var(--surface); padding: 80px 24px 24px; border-left: 1px solid var(--border); z-index: 99; transition: transform 0.4s; transform: translateX(100%); }
-    .nav-links.open { display: flex; transform: translateX(0); }
-    .hamburger { display: flex; }
-    .cats-grid { grid-template-columns: 1fr; gap: 2px; }
-    .location-wrap { grid-template-columns: 1fr; gap: 32px; }
-    .why-grid { grid-template-columns: 1fr 1fr; }
-    .social-row { gap: 12px; }
-    .social-btn { padding: 12px 18px; font-size: 13px; }
-  }
-
-  @media (max-width: 480px) {
-    .why-grid { grid-template-columns: 1fr; }
-    .hero-actions { flex-direction: column; align-items: center; }
-    .btn-primary, .btn-outline { width: 100%; justify-content: center; }
-  }
-
-  /* observe fade in */
-  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   TOKENS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+:root {
+  --ink:        #080605;
+  --ink2:       #100e0b;
+  --ink3:       #1a1714;
+  --ink4:       #242018;
+  --gold:       #c9922a;
+  --gold-hi:    #e8b84b;
+  --gold-lo:    #6b4d12;
+  --ember:      #c04b22;
+  --fog:        #6b6355;
+  --parchment:  #ede3d0;
+  --parchment2: #f5f0e8;
+  --border:     rgba(201,146,42,.14);
+  --border2:    rgba(201,146,42,.30);
+  --r: 3px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: 'Cairo', sans-serif;
+  background: var(--ink);
+  color: var(--parchment);
+  overflow-x: hidden;
+}
+
+/* grain */
+body::after {
+  content: '';
+  position: fixed; inset: 0; z-index: 9998; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23g)' opacity='.045'/%3E%3C/svg%3E");
+  opacity: .55;
+}
+
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--ink); }
+::-webkit-scrollbar-thumb { background: var(--gold-lo); }
+
+a { text-decoration: none; color: inherit; }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   TOPBAR / NAV
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+#topbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 40px;
+  transition: background .4s, box-shadow .4s;
+}
+#topbar.scrolled {
+  background: rgba(8,6,5,.96);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 1px 0 var(--border);
+}
+
+.nb-brand {
+  display: flex; flex-direction: column; line-height: 1;
+}
+.nb-brand-ar {
+  font-family: 'Scheherazade New', serif;
+  font-size: 20px; color: var(--gold-hi);
+  letter-spacing: .5px;
+}
+.nb-brand-sub {
+  font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--fog); margin-top: 3px;
+}
+
+.nb-links {
+  display: flex; gap: 32px; list-style: none; align-items: center;
+}
+.nb-links a {
+  font-size: 13px; font-weight: 500; color: var(--fog);
+  letter-spacing: .5px; transition: color .25s;
+  position: relative;
+}
+.nb-links a::after {
+  content: ''; position: absolute; bottom: -4px; right: 0;
+  width: 0; height: 1px; background: var(--gold);
+  transition: width .3s;
+}
+.nb-links a:hover { color: var(--parchment); }
+.nb-links a:hover::after { width: 100%; }
+
+.nb-cta {
+  background: var(--gold) !important;
+  color: var(--ink) !important;
+  padding: 9px 22px !important;
+  border-radius: var(--r) !important;
+  font-weight: 700 !important;
+  font-size: 13px !important;
+  transition: background .25s, transform .2s !important;
+  letter-spacing: .3px;
+}
+.nb-cta::after { display: none !important; }
+.nb-cta:hover { background: var(--gold-hi) !important; transform: translateY(-1px) !important; }
+
+.nb-ham {
+  display: none; flex-direction: column; gap: 5px;
+  cursor: pointer; padding: 6px;
+}
+.nb-ham span {
+  display: block; width: 22px; height: 1.5px;
+  background: var(--parchment); border-radius: 2px;
+  transition: all .3s;
+}
+
+/* mobile drawer */
+#mob-nav {
+  display: none;
+  position: fixed; inset: 0; z-index: 199;
+  background: rgba(8,6,5,.97);
+  backdrop-filter: blur(20px);
+  flex-direction: column; align-items: center; justify-content: center;
+  gap: 36px;
+}
+#mob-nav.open { display: flex; }
+#mob-nav a {
+  font-size: 26px; font-weight: 600; color: var(--fog);
+  transition: color .2s;
+}
+#mob-nav a:hover { color: var(--gold-hi); }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   HERO
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+#hero {
+  min-height: 100svh;
+  position: relative; overflow: hidden;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding: 120px 24px 80px;
+}
+
+/* layered bg */
+.hero-layers {
+  position: absolute; inset: 0; z-index: 0; pointer-events: none;
+}
+
+/* central glow */
+.hl-glow {
+  position: absolute; top: 38%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(800px, 120vw); height: min(800px, 120vw);
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(201,146,42,.10) 0%, transparent 65%);
+}
+
+/* ember bottom glow */
+.hl-ember {
+  position: absolute; bottom: -10%; left: 50%;
+  transform: translateX(-50%);
+  width: 60vw; height: 300px;
+  background: radial-gradient(ellipse, rgba(192,75,34,.14) 0%, transparent 70%);
+}
+
+/* geometric lines */
+.hl-lines {
+  position: absolute; inset: 0;
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 79px, rgba(201,146,42,.025) 79px, rgba(201,146,42,.025) 80px),
+    repeating-linear-gradient(90deg, transparent, transparent 79px, rgba(201,146,42,.025) 79px, rgba(201,146,42,.025) 80px);
+}
+
+/* diagonal stripe */
+.hl-diag {
+  position: absolute; top: 0; left: -20%; width: 40%; height: 100%;
+  background: linear-gradient(135deg, transparent 45%, rgba(201,146,42,.018) 50%, transparent 55%);
+}
+
+/* smoke SVG path animation */
+.hl-smoke {
+  position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+  width: 100%; height: 50%; opacity: .22;
+}
+
+.smoke-path {
+  fill: none;
+  stroke: rgba(201,146,42,.5);
+  stroke-width: 1.5;
+  stroke-dasharray: 600;
+  stroke-dashoffset: 600;
+  animation: drawSmoke 6s ease-in-out infinite alternate;
+}
+@keyframes drawSmoke {
+  0%   { stroke-dashoffset: 600; opacity: 0; }
+  30%  { opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: .4; }
+}
+
+/* hero content */
+.hero-eyebrow {
+  position: relative; z-index: 1;
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 10px; letter-spacing: 5px; text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 24px;
+  opacity: 0; animation: fadeSlide .8s .1s ease both;
+}
+.hero-eyebrow::before, .hero-eyebrow::after {
+  content: ''; display: block; width: 32px; height: 1px; background: var(--gold-lo);
+}
+
+.hero-title-wrap {
+  position: relative; z-index: 1;
+  opacity: 0; animation: fadeSlide .9s .2s ease both;
+}
+
+.hero-name {
+  font-family: 'Scheherazade New', serif;
+  font-size: clamp(64px, 14vw, 140px);
+  line-height: .95;
+  color: var(--parchment2);
+  letter-spacing: -1px;
+  text-shadow: 0 0 80px rgba(201,146,42,.18);
+}
+
+.hero-name-accent {
+  font-family: 'Scheherazade New', serif;
+  display: block;
+  font-size: clamp(32px, 6vw, 60px);
+  color: var(--gold);
+  letter-spacing: 2px;
+  margin-top: -8px;
+}
+
+.hero-tagline {
+  position: relative; z-index: 1;
+  margin-top: 20px;
+  font-size: clamp(14px, 2.2vw, 18px);
+  color: var(--fog); font-weight: 300; letter-spacing: .5px;
+  opacity: 0; animation: fadeSlide 1s .35s ease both;
+}
+
+.hero-divider {
+  position: relative; z-index: 1;
+  width: 1px; height: 40px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  margin: 28px auto;
+  opacity: 0; animation: fadeSlide .8s .45s ease both;
+}
+
+.hero-btns {
+  position: relative; z-index: 1;
+  display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+  opacity: 0; animation: fadeSlide .9s .55s ease both;
+}
+
+.btn-gold {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--gold);
+  color: var(--ink);
+  padding: 13px 32px;
+  border-radius: var(--r);
+  font-family: 'Cairo', sans-serif;
+  font-size: 14px; font-weight: 700;
+  letter-spacing: .3px;
+  cursor: pointer; border: none;
+  transition: background .25s, transform .2s, box-shadow .25s;
+}
+.btn-gold:hover {
+  background: var(--gold-hi);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(201,146,42,.35);
+}
+
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: transparent;
+  color: var(--parchment);
+  padding: 12px 28px;
+  border-radius: var(--r);
+  font-family: 'Cairo', sans-serif;
+  font-size: 14px; font-weight: 500;
+  border: 1px solid var(--border2);
+  cursor: pointer;
+  transition: border-color .25s, color .25s;
+}
+.btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+/* hero scroll line */
+.hero-scroll {
+  position: absolute; bottom: 32px; left: 50%;
+  transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  z-index: 1;
+  opacity: 0; animation: fadeSlide .8s .9s ease both;
+}
+.hero-scroll span {
+  font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--fog);
+}
+.hero-scroll-line {
+  width: 1px; height: 48px;
+  background: linear-gradient(to bottom, var(--gold-lo), transparent);
+  animation: lineBreath 2s ease-in-out infinite;
+}
+@keyframes lineBreath {
+  0%,100% { opacity: .4; }
+  50%      { opacity: 1; }
+}
+
+@keyframes fadeSlide {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SECTION SHARED
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.section { padding: 96px 0; }
+.section-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.section-kicker {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 9px; letter-spacing: 5px; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 16px;
+}
+.section-kicker::before {
+  content: ''; display: block; width: 24px; height: 1px; background: var(--gold-lo);
+}
+
+.section-h {
+  font-family: 'Scheherazade New', serif;
+  font-size: clamp(30px, 5vw, 52px);
+  color: var(--parchment2);
+  line-height: 1.15;
+}
+
+.section-p {
+  margin-top: 12px;
+  font-size: 15px; font-weight: 300;
+  color: var(--fog); max-width: 480px;
+  line-height: 1.9;
+}
+
+/* reveal */
+.rv {
+  opacity: 0; transform: translateY(32px);
+  transition: opacity .75s ease, transform .75s ease;
+}
+.rv.in { opacity: 1; transform: translateY(0); }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   CATEGORIES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+#cats { background: var(--ink2); }
+
+.cats-header {
+  display: flex; align-items: flex-end;
+  justify-content: space-between; gap: 24px;
+  margin-bottom: 52px;
+  flex-wrap: wrap;
+}
+
+.cats-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.cat {
+  background: var(--ink2);
+  padding: 44px 36px;
+  position: relative; overflow: hidden;
+  cursor: pointer;
+  transition: background .35s;
+}
+.cat:hover { background: var(--ink3); }
+
+/* top accent line */
+.cat::before {
+  content: '';
+  position: absolute; top: 0; right: 0; left: 0; height: 2px;
+  background: linear-gradient(to left, var(--gold), transparent);
+  transform: scaleX(0); transform-origin: right;
+  transition: transform .45s ease;
+}
+.cat:hover::before { transform: scaleX(1); }
+
+/* bg number */
+.cat-num {
+  position: absolute; top: 16px; left: 28px;
+  font-family: 'Scheherazade New', serif;
+  font-size: 80px; line-height: 1;
+  color: var(--gold-lo); opacity: .25;
+  user-select: none; pointer-events: none;
+  transition: opacity .35s;
+}
+.cat:hover .cat-num { opacity: .4; }
+
+.cat-icon {
+  font-size: 44px; margin-bottom: 20px;
+  display: block; line-height: 1;
+  position: relative; z-index: 1;
+  transition: transform .3s;
+}
+.cat:hover .cat-icon { transform: scale(1.1); }
+
+.cat-en {
+  font-size: 9px; letter-spacing: 4px; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 8px;
+  position: relative; z-index: 1;
+}
+
+.cat-title {
+  font-family: 'Scheherazade New', serif;
+  font-size: 30px; color: var(--parchment2);
+  margin-bottom: 12px;
+  position: relative; z-index: 1;
+}
+
+.cat-desc {
+  font-size: 13px; color: var(--fog);
+  line-height: 1.9; font-weight: 300;
+  position: relative; z-index: 1;
+}
+
+.cat-tags {
+  display: flex; flex-wrap: wrap; gap: 7px;
+  margin-top: 20px; position: relative; z-index: 1;
+}
+
+.ctag {
+  font-size: 10px; letter-spacing: .5px;
+  padding: 4px 11px;
+  border: 1px solid rgba(201,146,42,.18);
+  border-radius: 2px; color: #5a5040;
+  transition: all .3s;
+}
+.cat:hover .ctag {
+  border-color: rgba(201,146,42,.4);
+  color: var(--gold);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   FEATURES / WHY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+#features { background: var(--ink); }
+
+.feat-layout {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 80px; align-items: start;
+  margin-top: 0;
+}
+
+.feat-left { position: sticky; top: 100px; }
+
+.feat-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 1px; background: var(--border);
+  border: 1px solid var(--border); border-radius: 4px; overflow: hidden;
+}
+
+.feat-card {
+  background: var(--ink);
+  padding: 32px 28px;
+  transition: background .3s;
+}
+.feat-card:hover { background: var(--ink2); }
+
+.feat-card-icon {
+  font-size: 28px; margin-bottom: 14px; display: block;
+}
+.feat-card-title {
+  font-size: 16px; font-weight: 700; color: var(--parchment2);
+  margin-bottom: 8px;
+}
+.feat-card-desc {
+  font-size: 13px; color: var(--fog); line-height: 1.8; font-weight: 300;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   LOCATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+#location { background: var(--ink2); }
+
+.loc-layout {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 60px; align-items: center;
+  margin-top: 52px;
+}
+
+.loc-list { display: flex; flex-direction: column; gap: 24px; }
+
+.loc-item {
+  display: flex; gap: 16px; align-items: flex-start;
+  padding: 20px 24px;
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  transition: border-color .3s, background .3s;
+}
+.loc-item:hover { border-color: var(--border2); background: rgba(201,146,42,.03); }
+
+.loc-item-icon {
+  font-size: 22px; flex-shrink: 0; line-height: 1;
+  color: var(--gold); margin-top: 2px;
+}
+.loc-item-label {
+  font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 5px;
+}
+.loc-item-val {
+  font-size: 15px; color: var(--parchment); font-weight: 400;
+}
+
+.map-card {
+  border: 1px solid var(--border);
+  border-radius: 4px; overflow: hidden;
+  background: var(--ink3);
+  height: 320px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  position: relative;
+  gap: 16px;
+  cursor: pointer;
+  transition: border-color .3s;
+}
+.map-card:hover { border-color: var(--border2); }
+
+/* map grid bg */
+.map-card::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 29px, rgba(201,146,42,.04) 29px, rgba(201,146,42,.04) 30px),
+    repeating-linear-gradient(90deg, transparent, transparent 29px, rgba(201,146,42,.04) 29px, rgba(201,146,42,.04) 30px);
+}
+
+/* pulse rings */
+.map-pulse {
+  position: relative; z-index: 1;
+  width: 14px; height: 14px;
+  background: var(--gold);
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 rgba(201,146,42,.6);
+  animation: mapPulse 2.5s ease-out infinite;
+}
+@keyframes mapPulse {
+  0%   { box-shadow: 0 0 0 0 rgba(201,146,42,.6); }
+  70%  { box-shadow: 0 0 0 28px rgba(201,146,42,0); }
+  100% { box-shadow: 0 0 0 0 rgba(201,146,42,0); }
+}
+
+.map-lbl {
+  position: relative; z-index: 1;
+  font-size: 12px; letter-spacing: 1px; color: var(--fog);
+}
+
+.map-btn {
+  position: relative; z-index: 1;
+  display: inline-flex; align-items: center; gap: 8px;
+  background: transparent; border: 1px solid var(--border2);
+  color: var(--gold); padding: 9px 20px;
+  border-radius: var(--r);
+  font-family: 'Cairo', sans-serif;
+  font-size: 12px; font-weight: 600;
+  cursor: pointer; transition: all .25s;
+  text-decoration: none;
+}
+.map-btn:hover { background: var(--gold); color: var(--ink); }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SOCIAL / CONTACT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+#contact {
+  background: var(--ink);
+  text-align: center;
+}
+
+.contact-eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 9px; letter-spacing: 5px; text-transform: uppercase; color: var(--gold);
+  margin-bottom: 18px;
+}
+.contact-eyebrow::before,.contact-eyebrow::after {
+  content:''; display:block; width:32px; height:1px; background:var(--gold-lo);
+}
+
+.contact-h {
+  font-family: 'Scheherazade New', serif;
+  font-size: clamp(32px, 6vw, 58px);
+  color: var(--parchment2); margin-bottom: 12px;
+}
+
+.contact-sub {
+  font-size: 15px; color: var(--fog); font-weight: 300; max-width: 420px; margin: 0 auto;
+  line-height: 1.9;
+}
+
+.social-strip {
+  display: flex; justify-content: center; flex-wrap: wrap;
+  gap: 14px; margin-top: 44px;
+}
+
+.socbtn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 14px 30px; border-radius: var(--r);
+  font-family: 'Cairo', sans-serif;
+  font-size: 14px; font-weight: 600;
+  border: 1px solid;
+  cursor: pointer; transition: all .3s;
+  text-decoration: none;
+}
+.socbtn svg { width: 20px; height: 20px; fill: currentColor; flex-shrink: 0; }
+
+.sb-wa {
+  background: rgba(18,45,28,.8);
+  color: #25d366; border-color: rgba(37,211,102,.25);
+}
+.sb-wa:hover {
+  background: #25d366; color: #fff;
+  box-shadow: 0 8px 28px rgba(37,211,102,.3);
+  transform: translateY(-2px);
+}
+
+.sb-ig {
+  background: rgba(38,20,36,.8);
+  color: #e1306c; border-color: rgba(225,48,108,.25);
+}
+.sb-ig:hover {
+  background: linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);
+  color: #fff; border-color: transparent;
+  transform: translateY(-2px);
+}
+
+.sb-sn {
+  background: rgba(24,24,10,.8);
+  color: #fffc00; border-color: rgba(255,252,0,.2);
+}
+.sb-sn:hover {
+  background: #fffc00; color: #000;
+  box-shadow: 0 8px 28px rgba(255,252,0,.25);
+  transform: translateY(-2px);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   FOOTER
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+footer {
+  background: var(--ink2);
+  border-top: 1px solid var(--border);
+  padding: 36px 40px;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 16px;
+}
+.footer-brand {
+  font-family: 'Scheherazade New', serif;
+  font-size: 20px; color: var(--gold-hi);
+}
+.footer-copy {
+  font-size: 12px; color: var(--fog); letter-spacing: .5px;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   FLOATING WA
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+#fwa {
+  position: fixed; bottom: 32px; left: 32px; z-index: 300;
+  width: 56px; height: 56px;
+  background: #25d366; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 20px rgba(37,211,102,.5);
+  animation: waPulse 3s ease-in-out infinite;
+  transition: transform .25s;
+  text-decoration: none;
+}
+#fwa:hover { transform: scale(1.1); }
+#fwa svg { width: 26px; height: 26px; fill: #fff; }
+@keyframes waPulse {
+  0%,100% { box-shadow: 0 4px 20px rgba(37,211,102,.5); }
+  50%      { box-shadow: 0 6px 38px rgba(37,211,102,.85); }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   ADMIN PANEL
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+#admin-fab {
+  position: fixed; bottom: 32px; right: 32px; z-index: 300;
+  width: 46px; height: 46px;
+  background: var(--ink3); border: 1px solid var(--border2);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 17px;
+  transition: all .25s;
+  box-shadow: 0 4px 20px rgba(0,0,0,.6);
+}
+#admin-fab:hover { background: var(--gold); border-color: var(--gold); }
+
+#admin-drawer {
+  position: fixed; top: 0; right: -420px; bottom: 0;
+  width: 400px; max-width: 100vw;
+  background: var(--ink2);
+  border-left: 1px solid var(--border);
+  z-index: 400;
+  overflow-y: auto;
+  transition: right .4s cubic-bezier(.4,0,.2,1);
+  box-shadow: -16px 0 60px rgba(0,0,0,.8);
+}
+#admin-drawer.open { right: 0; }
+
+.adw-head {
+  position: sticky; top: 0; z-index: 1;
+  background: var(--ink2);
+  border-bottom: 1px solid var(--border);
+  padding: 20px 24px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.adw-title {
+  font-family: 'Scheherazade New', serif;
+  font-size: 20px; color: var(--gold-hi);
+}
+.adw-close {
+  background: none; border: none; color: var(--fog);
+  font-size: 20px; cursor: pointer; padding: 4px; transition: color .2s;
+}
+.adw-close:hover { color: #c04b22; }
+
+.adw-body { padding: 24px; }
+
+.adw-sect {
+  margin-bottom: 28px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid rgba(201,146,42,.07);
+}
+.adw-sect-title {
+  font-size: 9px; letter-spacing: 4px; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 16px; display: flex; align-items: center; gap: 8px;
+}
+.adw-sect-title::before {
+  content: ''; display: block; width: 16px; height: 1px; background: var(--gold-lo);
+}
+
+.adw-field { margin-bottom: 12px; }
+.adw-label {
+  display: block; font-size: 11px; color: var(--fog);
+  margin-bottom: 6px; letter-spacing: .5px;
+}
+.adw-input, .adw-select {
+  width: 100%;
+  background: var(--ink);
+  border: 1px solid var(--border);
+  border-radius: var(--r); padding: 10px 13px;
+  color: var(--parchment);
+  font-family: 'Cairo', sans-serif; font-size: 13px;
+  outline: none; transition: border-color .25s;
+  direction: rtl;
+}
+.adw-input:focus, .adw-select:focus { border-color: var(--gold); }
+
+.adw-row {
+  display: flex; align-items: center; gap: 11px;
+  margin-bottom: 10px;
+}
+.adw-sw { position: relative; width: 38px; height: 21px; flex-shrink: 0; }
+.adw-sw input { opacity: 0; width: 0; height: 0; }
+.adw-sw-sl {
+  position: absolute; inset: 0;
+  background: var(--ink); border: 1px solid var(--border);
+  border-radius: 21px; cursor: pointer; transition: all .3s;
+}
+.adw-sw-sl::before {
+  content: ''; position: absolute; top: 2px; right: 2px;
+  width: 15px; height: 15px;
+  background: var(--fog); border-radius: 50%; transition: all .3s;
+}
+.adw-sw input:checked + .adw-sw-sl { background: var(--gold-lo); border-color: var(--gold); }
+.adw-sw input:checked + .adw-sw-sl::before { right: calc(100% - 17px); background: var(--gold-hi); }
+
+.adw-sw-lbl { font-size: 13px; color: var(--parchment); }
+
+.adw-save {
+  width: 100%; background: var(--gold); color: var(--ink);
+  border: none; padding: 12px; border-radius: var(--r);
+  font-family: 'Cairo', sans-serif; font-size: 14px; font-weight: 700;
+  cursor: pointer; transition: all .25s; margin-top: 4px;
+}
+.adw-save:hover { background: var(--gold-hi); }
+
+.adw-note {
+  text-align: center; font-size: 11px; color: var(--fog);
+  margin-top: 10px; letter-spacing: .5px;
+}
+
+/* promo bar */
+#promo-bar {
+  display: none;
+  background: linear-gradient(90deg, var(--gold-lo), rgba(201,146,42,.2), var(--gold-lo));
+  border-bottom: 1px solid var(--border2);
+  text-align: center; padding: 11px 20px;
+  font-size: 13px; color: var(--gold-hi);
+  letter-spacing: .5px; position: relative; z-index: 100;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   RESPONSIVE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+@media (max-width: 1024px) {
+  .cats-grid { grid-template-columns: 1fr; }
+  .feat-layout { grid-template-columns: 1fr; gap: 48px; }
+  .feat-left { position: static; }
+}
+
+@media (max-width: 768px) {
+  #topbar { padding: 0 20px; }
+  .nb-links { display: none; }
+  .nb-ham { display: flex; }
+  .section-inner { padding: 0 20px; }
+  .section { padding: 72px 0; }
+  .cats-grid { grid-template-columns: 1fr; }
+  .feat-grid { grid-template-columns: 1fr; }
+  .loc-layout { grid-template-columns: 1fr; }
+  footer { flex-direction: column; align-items: center; text-align: center; padding: 28px 20px; }
+  .map-card { height: 240px; }
+}
+
+@media (max-width: 480px) {
+  .hero-btns { flex-direction: column; align-items: stretch; }
+  .btn-gold, .btn-ghost { justify-content: center; }
+  .social-strip { flex-direction: column; align-items: center; }
+  .socbtn { width: 100%; max-width: 280px; justify-content: center; }
+  #admin-drawer { width: 100vw; }
+}
+
 </style>
 </head>
 <body>
 
+<!-- PROMO BAR -->
+<div id="promo-bar"><span id="promo-text">🔥 وصلت معسلات جديدة — تشكيلة Adalya Ice | محدودة الكمية</span></div>
+
 <!-- FLOATING WA -->
-<a class="float-wa" href="https://wa.me/966500000000?text=مرحبا،%20أود%20الاستفسار%20عن%20منتجاتكم" target="_blank" aria-label="تواصل واتساب">
+<a id="fwa" href="https://wa.me/966500000000?text=مرحبا،%20أود%20الاستفسار%20عن%20منتجاتكم" target="_blank" aria-label="واتساب">
   <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.553 4.12 1.524 5.855L0 24l6.29-1.499A11.947 11.947 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.003-1.372l-.359-.213-3.733.89.944-3.622-.235-.374A9.795 9.795 0 012.182 12 9.818 9.818 0 0112 2.182 9.818 9.818 0 0121.818 12 9.818 9.818 0 0112 21.818z"/></svg>
 </a>
 
-<!-- ADMIN TOGGLE -->
-<button id="admin-toggle" title="لوحة التحكم" onclick="toggleAdmin()">⚙️</button>
+<!-- ADMIN FAB -->
+<button id="admin-fab" onclick="toggleDrawer()" title="لوحة التحكم">⚙️</button>
 
-<!-- ADMIN PANEL -->
-<div id="admin-panel">
-  <div class="admin-header">
-    <div class="admin-title">لوحة التحكم</div>
-    <button class="admin-close" onclick="toggleAdmin()">✕</button>
+<!-- ─── ADMIN DRAWER ─── -->
+<aside id="admin-drawer">
+  <div class="adw-head">
+    <div class="adw-title">لوحة التحكم</div>
+    <button class="adw-close" onclick="toggleDrawer()">✕</button>
   </div>
+  <div class="adw-body">
 
-  <!-- Shop Info -->
-  <div class="admin-section">
-    <div class="admin-section-title">معلومات المحل</div>
-    <div class="field-group">
-      <label class="field-label">اسم المحل</label>
-      <input class="field-input" id="a-name" value="معسلات حجر كيف" oninput="liveUpdate('shop-name', this.value)">
+    <!-- shop info -->
+    <div class="adw-sect">
+      <div class="adw-sect-title">هوية المحل</div>
+      <div class="adw-field">
+        <label class="adw-label">اسم المحل</label>
+        <input class="adw-input" id="f-name" value="معسلات حجر كيف" oninput="live('sname', this.value)">
+      </div>
+      <div class="adw-field">
+        <label class="adw-label">الشعار التسويقي</label>
+        <input class="adw-input" id="f-tag" value="كيّف بلا حدود" oninput="live('stagline', this.value)">
+      </div>
+      <div class="adw-field">
+        <label class="adw-label">العنوان</label>
+        <input class="adw-input" id="f-addr" value="شارع الحراء، جدة" oninput="live('saddr', this.value)">
+      </div>
+      <div class="adw-field">
+        <label class="adw-label">ساعات العمل</label>
+        <input class="adw-input" id="f-hours" value="٢ ظهراً — ٣ فجراً يومياً" oninput="live('shours', this.value)">
+      </div>
     </div>
-    <div class="field-group">
-      <label class="field-label">العنوان</label>
-      <input class="field-input" id="a-addr" value="شارع الحراء، جدة" oninput="liveUpdate('shop-addr', this.value)">
+
+    <!-- links -->
+    <div class="adw-sect">
+      <div class="adw-sect-title">روابط التواصل</div>
+      <div class="adw-field">
+        <label class="adw-label">رقم واتساب (بدون +)</label>
+        <input class="adw-input" id="f-wa" value="966500000000" dir="ltr">
+      </div>
+      <div class="adw-field">
+        <label class="adw-label">رابط انستغرام</label>
+        <input class="adw-input" id="f-ig" value="https://instagram.com/hijrkaif" dir="ltr">
+      </div>
+      <div class="adw-field">
+        <label class="adw-label">رابط سناب شات</label>
+        <input class="adw-input" id="f-sn" value="https://snapchat.com/add/hijrkaif" dir="ltr">
+      </div>
+      <div class="adw-field">
+        <label class="adw-label">رابط خرائط قوقل</label>
+        <input class="adw-input" id="f-maps" value="https://maps.google.com/?q=شارع+الحراء+جدة" dir="ltr">
+      </div>
     </div>
-    <div class="field-group">
-      <label class="field-label">ساعات العمل</label>
-      <input class="field-input" id="a-hours" value="٢ ظهراً — ٣ فجراً" oninput="liveUpdate('shop-hours', this.value)">
+
+    <!-- sections visibility -->
+    <div class="adw-sect">
+      <div class="adw-sect-title">إظهار الأقسام</div>
+      <div class="adw-row">
+        <label class="adw-sw"><input type="checkbox" checked onchange="toggleSect('cats',this.checked)"><span class="adw-sw-sl"></span></label>
+        <span class="adw-sw-lbl">قسم المنتجات</span>
+      </div>
+      <div class="adw-row">
+        <label class="adw-sw"><input type="checkbox" checked onchange="toggleSect('features',this.checked)"><span class="adw-sw-sl"></span></label>
+        <span class="adw-sw-lbl">لماذا نحن</span>
+      </div>
+      <div class="adw-row">
+        <label class="adw-sw"><input type="checkbox" checked onchange="toggleSect('location',this.checked)"><span class="adw-sw-sl"></span></label>
+        <span class="adw-sw-lbl">الموقع والعنوان</span>
+      </div>
+      <div class="adw-row">
+        <label class="adw-sw"><input type="checkbox" checked onchange="toggleSect('contact',this.checked)"><span class="adw-sw-sl"></span></label>
+        <span class="adw-sw-lbl">تواصل معنا</span>
+      </div>
     </div>
-    <div class="field-group">
-      <label class="field-label">شعار المحل (نص)</label>
-      <input class="field-input" id="a-tagline" value="كيّف بأصالة — تبغ بأناقة" oninput="liveUpdate('shop-tagline', this.value)">
+
+    <!-- promo -->
+    <div class="adw-sect">
+      <div class="adw-sect-title">الشريط الترويجي</div>
+      <div class="adw-row">
+        <label class="adw-sw"><input type="checkbox" id="sw-promo" onchange="togglePromo(this.checked)"><span class="adw-sw-sl"></span></label>
+        <span class="adw-sw-lbl">تفعيل الشريط</span>
+      </div>
+      <div class="adw-field">
+        <label class="adw-label">نص العرض</label>
+        <input class="adw-input" id="f-promo" value="🔥 وصلت معسلات جديدة — تشكيلة Adalya Ice | محدودة الكمية" oninput="live('promo-text', this.value)">
+      </div>
     </div>
+
+    <!-- theme color -->
+    <div class="adw-sect">
+      <div class="adw-sect-title">إعدادات اللون</div>
+      <div class="adw-field">
+        <label class="adw-label">لون الهوية الرئيسي</label>
+        <select class="adw-select" onchange="changeAccent(this.value)">
+          <option value="#c9922a">ذهبي (افتراضي)</option>
+          <option value="#2a8fc9">أزرق عميق</option>
+          <option value="#8f2a2a">أحمر عريق</option>
+          <option value="#2a8f5e">أخضر زمردي</option>
+        </select>
+      </div>
+    </div>
+
+    <button class="adw-save" onclick="saveAll()">💾 حفظ وتطبيق</button>
+    <p class="adw-note">التغييرات تنعكس مباشرةً على الصفحة</p>
   </div>
-
-  <!-- Links -->
-  <div class="admin-section">
-    <div class="admin-section-title">روابط التواصل</div>
-    <div class="field-group">
-      <label class="field-label">رقم واتساب</label>
-      <input class="field-input" id="a-wa" value="966500000000" dir="ltr">
-    </div>
-    <div class="field-group">
-      <label class="field-label">رابط انستغرام</label>
-      <input class="field-input" id="a-ig" value="https://instagram.com/hijrkaif" dir="ltr">
-    </div>
-    <div class="field-group">
-      <label class="field-label">رابط سناب</label>
-      <input class="field-input" id="a-sn" value="https://snapchat.com/add/hijrkaif" dir="ltr">
-    </div>
-  </div>
-
-  <!-- Sections toggle -->
-  <div class="admin-section">
-    <div class="admin-section-title">إظهار الأقسام</div>
-    <div class="field-toggle">
-      <label class="toggle-sw"><input type="checkbox" checked onchange="toggleSection('products', this.checked)"><span class="toggle-sw-slider"></span></label>
-      <span class="toggle-label">قسم المنتجات</span>
-    </div>
-    <div class="field-toggle">
-      <label class="toggle-sw"><input type="checkbox" checked onchange="toggleSection('why', this.checked)"><span class="toggle-sw-slider"></span></label>
-      <span class="toggle-label">لماذا نحن</span>
-    </div>
-    <div class="field-toggle">
-      <label class="toggle-sw"><input type="checkbox" checked onchange="toggleSection('location', this.checked)"><span class="toggle-sw-slider"></span></label>
-      <span class="toggle-label">الموقع والعنوان</span>
-    </div>
-    <div class="field-toggle">
-      <label class="toggle-sw"><input type="checkbox" checked onchange="toggleSection('contact', this.checked)"><span class="toggle-sw-slider"></span></label>
-      <span class="toggle-label">قسم التواصل</span>
-    </div>
-  </div>
-
-  <!-- Promo Banner -->
-  <div class="admin-section">
-    <div class="admin-section-title">إعلان / عرض خاص</div>
-    <div class="field-toggle">
-      <label class="toggle-sw"><input type="checkbox" id="banner-toggle" onchange="toggleBanner(this.checked)"><span class="toggle-sw-slider"></span></label>
-      <span class="toggle-label">تفعيل الشريط الترويجي</span>
-    </div>
-    <div class="field-group">
-      <label class="field-label">نص العرض</label>
-      <input class="field-input" id="a-banner" value="🔥 عرض خاص: اشتري ٣ حبات معسل واحصل على خصم ١٥٪" oninput="liveUpdate('banner-text', this.value)">
-    </div>
-  </div>
-
-  <button class="admin-save" onclick="saveAll()">💾 حفظ التغييرات</button>
-  <p class="admin-preview-note">التغييرات تنعكس فوراً على الصفحة</p>
-</div>
-
-<!-- PROMO BANNER (hidden by default) -->
-<div id="promo-banner" style="display:none; background: linear-gradient(135deg, var(--gold-dim), #3a2800); color: var(--gold-light); text-align: center; padding: 12px 24px; font-size: 14px; letter-spacing: 0.5px; position: relative; z-index: 98; border-bottom: 1px solid var(--border);">
-  <span id="banner-text">🔥 عرض خاص: اشتري ٣ حبات معسل واحصل على خصم ١٥٪</span>
-</div>
+</aside>
 
 <!-- ─── NAV ─── -->
-<nav>
-  <div class="nav-logo" id="shop-name">معسلات حجر كيف</div>
-  <ul class="nav-links" id="nav-links">
-    <li><a href="#products">المنتجات</a></li>
-    <li><a href="#why">لماذا نحن</a></li>
+<nav id="topbar">
+  <div class="nb-brand">
+    <span class="nb-brand-ar" id="sname">معسلات حجر كيف</span>
+    <span class="nb-brand-sub">جدة · الحراء</span>
+  </div>
+  <ul class="nb-links">
+    <li><a href="#cats">المنتجات</a></li>
+    <li><a href="#features">تميزنا</a></li>
     <li><a href="#location">موقعنا</a></li>
-    <li><a href="#contact" class="nav-cta">تواصل معنا</a></li>
+    <li><a href="#contact" class="nb-cta">تواصل معنا</a></li>
   </ul>
-  <div class="hamburger" onclick="toggleNav()" id="hamburger">
+  <div class="nb-ham" onclick="toggleMob()" id="ham-btn">
     <span></span><span></span><span></span>
   </div>
 </nav>
 
+<!-- MOBILE NAV -->
+<div id="mob-nav">
+  <a href="#cats" onclick="closeMob()">المنتجات</a>
+  <a href="#features" onclick="closeMob()">تميزنا</a>
+  <a href="#location" onclick="closeMob()">موقعنا</a>
+  <a href="#contact" onclick="closeMob()">تواصل معنا</a>
+</div>
+
 <!-- ─── HERO ─── -->
-<section class="hero" id="hero">
-  <div class="hero-bg"></div>
-
-  <!-- Animated smoke rings -->
-  <div class="smoke-wrap" id="smoke-wrap"></div>
-
-  <div class="hero-tag">جدة · شارع الحراء</div>
-  <h1 class="hero-title">
-    معسلات<br>
-    <span id="shop-name-hero">حجر كيف</span>
-  </h1>
-  <p class="hero-sub" id="shop-tagline">كيّف بأصالة — <strong>تبغ بأناقة</strong></p>
-
-  <div class="hero-actions">
-    <a href="#products" class="btn-primary">
-      <span>🪴</span> استعرض المنتجات
-    </a>
-    <a href="https://wa.me/966500000000" target="_blank" class="btn-outline">تواصل معنا</a>
+<section id="hero">
+  <div class="hero-layers">
+    <div class="hl-glow"></div>
+    <div class="hl-ember"></div>
+    <div class="hl-lines"></div>
+    <div class="hl-diag"></div>
+    <svg class="hl-smoke" viewBox="0 0 800 300" preserveAspectRatio="none">
+      <path class="smoke-path" d="M400,300 C380,250 440,220 400,170 C360,120 440,100 400,50"/>
+      <path class="smoke-path" style="animation-delay:.8s" d="M320,300 C300,240 370,210 340,155 C310,100 380,80 350,30"/>
+      <path class="smoke-path" style="animation-delay:1.6s" d="M480,300 C460,245 530,215 500,160 C470,105 540,85 510,35"/>
+    </svg>
   </div>
 
-  <div class="scroll-hint">
-    <div class="scroll-dot"></div>
+  <div class="hero-eyebrow">جدة · شارع الحراء</div>
+
+  <div class="hero-title-wrap">
+    <div class="hero-name">حجر</div>
+    <span class="hero-name-accent">كيف</span>
+  </div>
+
+  <p class="hero-tagline" id="stagline">كيّف بلا حدود</p>
+
+  <div class="hero-divider"></div>
+
+  <div class="hero-btns">
+    <a href="#cats" class="btn-gold">
+      <span>🪴</span> استعرض المنتجات
+    </a>
+    <a href="https://wa.me/966500000000" target="_blank" class="btn-ghost">
+      <span>💬</span> تواصل مباشر
+    </a>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
     <span>اكتشف</span>
   </div>
 </section>
 
-<!-- ─── PRODUCTS ─── -->
-<section id="products">
-  <div class="container">
-    <div class="reveal">
-      <div class="section-label">ما نقدمه</div>
-      <h2 class="section-title">أقسام المحل</h2>
-      <div class="gold-line"></div>
-      <p class="section-desc">اخترنا لك أفضل ما في عالم التبغ والمعسل، من أجود الماركات العالمية وأعرق النكهات</p>
+<!-- ─── CATEGORIES ─── -->
+<section class="section" id="cats">
+  <div class="section-inner">
+    <div class="cats-header">
+      <div class="rv">
+        <div class="section-kicker">ما نقدمه</div>
+        <h2 class="section-h">أقسام المحل</h2>
+        <p class="section-p">تشكيلة مختارة بعناية من أجود منتجات التبغ والمعسل، لكل ذوق نكهته</p>
+      </div>
     </div>
 
-    <div class="cats-grid">
-      <div class="cat-card reveal">
+    <div class="cats-grid rv">
+
+      <!-- Cat 1: Molasses -->
+      <div class="cat">
+        <div class="cat-num">٠١</div>
         <span class="cat-icon">🪴</span>
         <div class="cat-en">HOOKAH TOBACCO</div>
-        <div class="cat-name">المعسل</div>
-        <p class="cat-desc">تشكيلة واسعة من أجود أنواع المعسل العالمي والمحلي، بنكهات متنوعة تناسب جميع الأذواق</p>
-        <div class="cat-items">
-          <span class="tag">Al Fakher</span>
-          <span class="tag">Adalya</span>
-          <span class="tag">Fumari</span>
-          <span class="tag">Starbuzz</span>
-          <span class="tag">Social Smoke</span>
-          <span class="tag">Tangiers</span>
+        <div class="cat-title">المعسل</div>
+        <p class="cat-desc">أوسع تشكيلة من المعسل العالمي والمحلي في شارع الحراء — أكثر من ٦٠ نكهة جاهزة، تناسب كل ذوق وكل مزاج</p>
+        <div class="cat-tags">
+          <span class="ctag">Al Fakher</span>
+          <span class="ctag">Adalya</span>
+          <span class="ctag">Fumari</span>
+          <span class="ctag">Starbuzz</span>
+          <span class="ctag">Social Smoke</span>
+          <span class="ctag">Tangiers</span>
+          <span class="ctag">Darkside</span>
         </div>
       </div>
 
-      <div class="cat-card reveal">
+      <!-- Cat 2: Cigarettes -->
+      <div class="cat">
+        <div class="cat-num">٠٢</div>
         <span class="cat-icon">🚬</span>
         <div class="cat-en">CIGARETTES & TOBACCO</div>
-        <div class="cat-name">السجائر والتبغ</div>
-        <p class="cat-desc">أشهر ماركات السجائر العالمية، والتبغ المقطع للمدخن الذي يبحث عن التميز</p>
-        <div class="cat-items">
-          <span class="tag">Marlboro</span>
-          <span class="tag">Camel</span>
-          <span class="tag">Lucky Strike</span>
-          <span class="tag">تبغ لفافة</span>
-          <span class="tag">Virginia</span>
+        <div class="cat-title">السجائر والتبغ</div>
+        <p class="cat-desc">أشهر الماركات العالمية، التبغ المقطع لصنع اللفافة، وكل ما يبحث عنه المدخن المميّز</p>
+        <div class="cat-tags">
+          <span class="ctag">Marlboro</span>
+          <span class="ctag">Camel</span>
+          <span class="ctag">Lucky Strike</span>
+          <span class="ctag">Parliament</span>
+          <span class="ctag">Virginia Slim</span>
+          <span class="ctag">تبغ لفافة</span>
         </div>
       </div>
 
-      <div class="cat-card reveal">
+      <!-- Cat 3: Accessories -->
+      <div class="cat">
+        <div class="cat-num">٠٣</div>
         <span class="cat-icon">🌬️</span>
-        <div class="cat-en">ACCESSORIES & DEVICES</div>
-        <div class="cat-name">الأجهزة والإكسسوار</div>
-        <p class="cat-desc">كل ما تحتاجه لتجربة كيف مثالية، من حجارة وفحم وخراطيم وكباسات وملحقات الشيشة</p>
-        <div class="cat-items">
-          <span class="tag">فحم كوكوس</span>
-          <span class="tag">حجارة</span>
-          <span class="tag">خراطيم</span>
-          <span class="tag">رأس شيشة</span>
-          <span class="tag">كبّاسات</span>
-          <span class="tag">ورق ألمنيوم</span>
+        <div class="cat-en">DEVICES & ACCESSORIES</div>
+        <div class="cat-title">الأجهزة والإكسسوار</div>
+        <p class="cat-desc">كل ما تحتاجه لتجربة كيف مثالية — فحم، حجارة، رؤوس شيشة، خراطيم، وملحقات عالية الجودة</p>
+        <div class="cat-tags">
+          <span class="ctag">فحم كوكوس</span>
+          <span class="ctag">حجارة بخار</span>
+          <span class="ctag">رأس شيشة</span>
+          <span class="ctag">خراطيم</span>
+          <span class="ctag">ورق ألمنيوم</span>
+          <span class="ctag">كبّاسات</span>
         </div>
       </div>
+
     </div>
   </div>
 </section>
 
-<!-- ─── WHY ─── -->
-<section id="why">
-  <div class="container">
-    <div class="reveal" style="text-align:center">
-      <div class="section-label">تميزنا</div>
-      <h2 class="section-title">لماذا حجر كيف؟</h2>
-      <div class="gold-line" style="margin: 20px auto;"></div>
-    </div>
+<!-- ─── FEATURES ─── -->
+<section class="section" id="features">
+  <div class="section-inner">
+    <div class="feat-layout">
+      <div class="feat-left rv">
+        <div class="section-kicker">تميزنا</div>
+        <h2 class="section-h">لماذا حجر كيف؟</h2>
+        <div style="width:36px;height:2px;background:linear-gradient(to left,var(--gold),transparent);margin:20px 0;"></div>
+        <p class="section-p">
+          في زحمة المحلات اخترنا الجودة والأصالة — منتجات مضمونة، خدمة تعرف ذوقك، وأجواء تخليك ترجع
+        </p>
+      </div>
 
-    <div class="why-grid">
-      <div class="why-card reveal">
-        <span class="why-icon">⭐</span>
-        <div class="why-title">جودة مضمونة</div>
-        <p class="why-desc">جميع منتجاتنا أصلية ١٠٠٪ من موردين معتمدين، ولا نتهاون في الجودة</p>
-      </div>
-      <div class="why-card reveal">
-        <span class="why-icon">🎯</span>
-        <div class="why-title">تشكيلة واسعة</div>
-        <p class="why-desc">أكبر تشكيلة للمعسل في شارع الحراء، أكثر من ٥٠ نكهة جاهزة</p>
-      </div>
-      <div class="why-card reveal">
-        <span class="why-icon">🕐</span>
-        <div class="why-title">دوام طويل</div>
-        <p class="why-desc">مفتوحون من الظهر حتى الفجر — كيّف في أي وقت يناسبك</p>
-      </div>
-      <div class="why-card reveal">
-        <span class="why-icon">💬</span>
-        <div class="why-title">خدمة شخصية</div>
-        <p class="why-desc">فريقنا يساعدك تختار الأنسب لذوقك، مع نصائح للتجربة المثالية</p>
+      <div class="feat-grid rv">
+        <div class="feat-card">
+          <span class="feat-card-icon">⭐</span>
+          <div class="feat-card-title">جودة مضمونة</div>
+          <p class="feat-card-desc">جميع منتجاتنا أصلية من موردين معتمدين — لا تقليد ولا مجهول المصدر</p>
+        </div>
+        <div class="feat-card">
+          <span class="feat-card-icon">🎯</span>
+          <div class="feat-card-title">تشكيلة لا مثيل لها</div>
+          <p class="feat-card-desc">أكثر من ٦٠ نكهة معسل و٢٠+ ماركة سجائر تحت سقف واحد في الحراء</p>
+        </div>
+        <div class="feat-card">
+          <span class="feat-card-icon">🌙</span>
+          <div class="feat-card-title">دوام يناسبك</div>
+          <p class="feat-card-desc">مفتوحون من الظهر وحتى الفجر — كيّف في أي وقت يجيك المزاج</p>
+        </div>
+        <div class="feat-card">
+          <span class="feat-card-icon">💬</span>
+          <div class="feat-card-title">خدمة شخصية</div>
+          <p class="feat-card-desc">فريقنا يساعدك تختار الأنسب لذوقك، ويجيب على استفساراتك عبر واتساب</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ─── LOCATION ─── -->
-<section id="location">
-  <div class="container">
-    <div class="reveal">
-      <div class="section-label">اين نحن</div>
-      <h2 class="section-title">موقعنا</h2>
-      <div class="gold-line"></div>
+<section class="section" id="location">
+  <div class="section-inner">
+    <div class="rv">
+      <div class="section-kicker">اين نحن</div>
+      <h2 class="section-h">موقعنا</h2>
     </div>
-
-    <div class="location-wrap">
-      <div class="location-info">
-        <div class="location-item">
-          <div class="loc-icon">📍</div>
+    <div class="loc-layout">
+      <div class="loc-list rv">
+        <div class="loc-item">
+          <span class="loc-item-icon">📍</span>
           <div>
-            <div class="loc-label">العنوان</div>
-            <div class="loc-val" id="shop-addr">شارع الحراء، جدة</div>
+            <div class="loc-item-label">العنوان</div>
+            <div class="loc-item-val" id="saddr">شارع الحراء، جدة</div>
           </div>
         </div>
-        <div class="location-item">
-          <div class="loc-icon">⏰</div>
+        <div class="loc-item">
+          <span class="loc-item-icon">⏰</span>
           <div>
-            <div class="loc-label">ساعات العمل</div>
-            <div class="loc-val" id="shop-hours">٢ ظهراً — ٣ فجراً</div>
+            <div class="loc-item-label">ساعات العمل</div>
+            <div class="loc-item-val" id="shours">٢ ظهراً — ٣ فجراً يومياً</div>
           </div>
         </div>
-        <div class="location-item">
-          <div class="loc-icon">📞</div>
+        <div class="loc-item">
+          <span class="loc-item-icon">📞</span>
           <div>
-            <div class="loc-label">تواصل</div>
-            <div class="loc-val">واتساب متاح ٢٤/٧</div>
+            <div class="loc-item-label">التواصل</div>
+            <div class="loc-item-val">واتساب متاح على مدار الساعة</div>
           </div>
         </div>
-        <a href="https://maps.google.com/?q=شارع+الحراء+جدة" target="_blank" class="btn-map">🗺️ افتح في خرائط قوقل</a>
+        <a id="maps-link" href="https://maps.google.com/?q=شارع+الحراء+جدة" target="_blank" class="map-btn" style="width:fit-content">
+          🗺️ افتح في خرائط قوقل
+        </a>
       </div>
 
-      <div class="map-box">
-        <div class="map-pin"><span>📍</span></div>
-        <div class="map-label">معسلات حجر كيف — شارع الحراء</div>
-        <a href="https://maps.google.com/?q=شارع+الحراء+جدة" target="_blank" class="btn-map" style="margin-top: 8px">الاتجاهات</a>
+      <div class="map-card rv" onclick="window.open(document.getElementById('maps-link').href,'_blank')">
+        <div class="map-pulse"></div>
+        <div class="map-lbl">معسلات حجر كيف — شارع الحراء، جدة</div>
+        <a id="map-btn2" href="https://maps.google.com/?q=شارع+الحراء+جدة" target="_blank" class="map-btn" onclick="e=>e.stopPropagation()">
+          اضغط لفتح الخريطة
+        </a>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ─── CONTACT ─── -->
-<section id="contact">
-  <div class="container">
-    <div class="contact-wrap reveal">
-      <div class="section-label">تواصل معنا</div>
-      <h2 class="section-title">نحن هنا لك</h2>
-      <div class="gold-line" style="margin: 20px auto;"></div>
-      <p class="section-desc" style="margin: 0 auto; text-align:center">
-        تواصل معنا على واتساب أو تابعنا على منصاتنا لأحدث العروض والوصولات
-      </p>
-
-      <div class="social-row">
-        <a id="wa-link" href="https://wa.me/966500000000?text=مرحبا،%20أود%20الاستفسار" target="_blank" class="social-btn wa">
+<section class="section" id="contact">
+  <div class="section-inner" style="text-align:center">
+    <div class="rv">
+      <div class="contact-eyebrow">تواصل معنا</div>
+      <h2 class="contact-h">نحن هنا دائماً</h2>
+      <p class="contact-sub">سواء كان عندك سؤال، استفسار عن منتج، أو تبغ تبحث عنه — نردّ عليك بسرعة</p>
+      <div class="social-strip">
+        <a id="wa-btn" href="https://wa.me/966500000000?text=مرحبا،%20أود%20الاستفسار" target="_blank" class="socbtn sb-wa">
           <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.553 4.12 1.524 5.855L0 24l6.29-1.499A11.947 11.947 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.003-1.372l-.359-.213-3.733.89.944-3.622-.235-.374A9.795 9.795 0 012.182 12 9.818 9.818 0 0112 2.182 9.818 9.818 0 0121.818 12 9.818 9.818 0 0112 21.818z"/></svg>
           واتساب
         </a>
-
-        <a id="ig-link" href="https://instagram.com/hijrkaif" target="_blank" class="social-btn ig">
+        <a id="ig-btn" href="https://instagram.com/hijrkaif" target="_blank" class="socbtn sb-ig">
           <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
           انستغرام
         </a>
-
-        <a id="sn-link" href="https://snapchat.com/add/hijrkaif" target="_blank" class="social-btn sn">
+        <a id="sn-btn" href="https://snapchat.com/add/hijrkaif" target="_blank" class="socbtn sb-sn">
           <svg viewBox="0 0 24 24"><path d="M12.166.006C9.338-.102 6.742 1.29 5.222 3.578c-.636.96-.958 2.085-.96 3.225v.453c0 .84-.065 1.676-.193 2.503-.04.254-.104.386-.228.42-.305.086-.632.097-.944.133-.334.039-.678.14-.853.45-.162.288-.088.619.066.881.336.566.919.757 1.513.922.144.04.354.087.434.232.1.183.003.444-.068.62-.17.424-.381.83-.614 1.221-.506.846-1.16 1.669-2.004 2.196-.11.07-.23.13-.35.19-.18.08-.385.147-.403.374-.024.3.27.527.51.614.762.274 1.54.451 2.327.574.078.012.16.036.214.1.062.074.075.18.09.275.048.303.099.754.356.912.16.097.34.082.517.065.39-.038.772-.155 1.154-.248.447-.108.917-.127 1.366.01.26.08.49.218.713.361.404.258.816.566 1.297.626.076.009.152.013.228.013.47 0 .876-.222 1.26-.476.494-.33.993-.673 1.59-.73.217-.02.435.013.648.066.382.093.764.21 1.155.248.176.017.357.031.517-.065.258-.158.309-.61.356-.912.015-.094.028-.201.09-.276.054-.064.136-.088.215-.1.787-.122 1.566-.3 2.327-.573.24-.087.534-.315.51-.614-.018-.228-.223-.294-.403-.374-.118-.059-.24-.12-.35-.19-.844-.527-1.498-1.35-2.004-2.196-.233-.39-.443-.797-.614-1.221-.07-.176-.167-.437-.068-.62.08-.145.29-.193.434-.232.594-.165 1.177-.356 1.513-.922.154-.262.228-.593.066-.882-.175-.31-.518-.41-.853-.449-.313-.036-.64-.046-.944-.133-.124-.034-.189-.166-.228-.42-.128-.827-.193-1.663-.193-2.503v-.453c-.002-1.14-.324-2.266-.96-3.225C17.316 1.396 14.836.107 12.166.006z"/></svg>
           سناب شات
         </a>
@@ -1034,89 +1210,83 @@
 
 <!-- ─── FOOTER ─── -->
 <footer>
-  <div class="footer-logo" id="footer-name">معسلات حجر كيف</div>
-  <p class="footer-sub">جدة · شارع الحراء &nbsp;|&nbsp; © 2025 جميع الحقوق محفوظة</p>
+  <div class="footer-brand" id="footer-name">معسلات حجر كيف</div>
+  <div class="footer-copy">شارع الحراء، جدة &nbsp;·&nbsp; © ٢٠٢٥ جميع الحقوق محفوظة</div>
 </footer>
 
 <script>
-  /* ── SMOKE RINGS ── */
-  const wrap = document.getElementById('smoke-wrap');
-  for (let i = 0; i < 8; i++) {
-    const ring = document.createElement('div');
-    ring.className = 'smoke-ring';
-    const size = 40 + Math.random() * 80;
-    ring.style.cssText = `
-      width:${size}px; height:${size}px;
-      bottom:${Math.random() * 20}%;
-      left:${10 + Math.random() * 80}%;
-      animation-duration:${6 + Math.random() * 8}s;
-      animation-delay:${Math.random() * 8}s;
-      opacity:0;
-    `;
-    wrap.appendChild(ring);
-  }
+/* ── TOPBAR SCROLL ── */
+window.addEventListener('scroll', () => {
+  document.getElementById('topbar').classList.toggle('scrolled', window.scrollY > 40);
+});
 
-  /* ── HAMBURGER NAV ── */
-  function toggleNav() {
-    document.getElementById('nav-links').classList.toggle('open');
-  }
+/* ── MOBILE NAV ── */
+function toggleMob() {
+  document.getElementById('mob-nav').classList.toggle('open');
+}
+function closeMob() {
+  document.getElementById('mob-nav').classList.remove('open');
+}
 
-  /* ── ADMIN PANEL ── */
-  function toggleAdmin() {
-    document.getElementById('admin-panel').classList.toggle('open');
-  }
+/* ── ADMIN DRAWER ── */
+function toggleDrawer() {
+  document.getElementById('admin-drawer').classList.toggle('open');
+}
 
-  /* ── LIVE UPDATE ── */
-  function liveUpdate(id, val) {
-    document.querySelectorAll('#' + id).forEach(el => el.textContent = val);
-    if (id === 'shop-name') {
-      document.getElementById('shop-name-hero').textContent = val.replace('معسلات ', '');
-      document.getElementById('footer-name').textContent = val;
-    }
-  }
+/* ── LIVE UPDATE ── */
+function live(id, val) {
+  document.querySelectorAll('#' + id).forEach(el => el.textContent = val);
+  if (id === 'sname') document.getElementById('footer-name').textContent = val;
+}
 
-  /* ── TOGGLE SECTION ── */
-  function toggleSection(id, show) {
-    const el = document.getElementById(id);
-    if (el) el.style.display = show ? '' : 'none';
-  }
+/* ── TOGGLE SECTION ── */
+function toggleSect(id, on) {
+  const el = document.getElementById(id);
+  if (el) el.style.display = on ? '' : 'none';
+}
 
-  /* ── PROMO BANNER ── */
-  function toggleBanner(show) {
-    document.getElementById('promo-banner').style.display = show ? 'block' : 'none';
-  }
+/* ── PROMO BAR ── */
+function togglePromo(on) {
+  document.getElementById('promo-bar').style.display = on ? 'block' : 'none';
+}
 
-  /* ── SAVE ALL ── */
-  function saveAll() {
-    const wa = document.getElementById('a-wa').value;
-    const ig = document.getElementById('a-ig').value;
-    const sn = document.getElementById('a-sn').value;
+/* ── ACCENT COLOR ── */
+function changeAccent(color) {
+  document.documentElement.style.setProperty('--gold', color);
+  // derive lighter/darker
+  document.documentElement.style.setProperty('--gold-hi', color);
+}
 
-    document.getElementById('wa-link').href = `https://wa.me/${wa}?text=مرحبا،%20أود%20الاستفسار`;
-    document.querySelector('.float-wa').href = `https://wa.me/${wa}?text=مرحبا،%20أود%20الاستفسار`;
-    document.getElementById('ig-link').href = ig;
-    document.getElementById('sn-link').href = sn;
+/* ── SAVE ALL ── */
+function saveAll() {
+  const wa    = document.getElementById('f-wa').value.trim();
+  const ig    = document.getElementById('f-ig').value.trim();
+  const sn    = document.getElementById('f-sn').value.trim();
+  const maps  = document.getElementById('f-maps').value.trim();
+  const waUrl = `https://wa.me/${wa}?text=مرحبا،%20أود%20الاستفسار`;
 
-    const btn = document.querySelector('.admin-save');
-    btn.textContent = '✅ تم الحفظ';
-    btn.style.background = '#2a5a2a';
-    setTimeout(() => {
-      btn.textContent = '💾 حفظ التغييرات';
-      btn.style.background = '';
-    }, 2000);
-  }
+  document.getElementById('wa-btn').href    = waUrl;
+  document.getElementById('fwa').href       = waUrl;
+  document.getElementById('ig-btn').href    = ig;
+  document.getElementById('sn-btn').href    = sn;
+  document.getElementById('maps-link').href = maps;
+  document.getElementById('map-btn2').href  = maps;
 
-  /* ── SCROLL REVEAL ── */
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
-  }, { threshold: 0.12 });
+  const btn = document.querySelector('.adw-save');
+  btn.textContent = '✅ تم الحفظ بنجاح';
+  btn.style.background = '#1a4a2a';
+  setTimeout(() => {
+    btn.textContent = '💾 حفظ وتطبيق';
+    btn.style.background = '';
+  }, 2500);
+}
 
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-  /* ── CLOSE NAV ON LINK CLICK ── */
-  document.querySelectorAll('.nav-links a').forEach(a => {
-    a.addEventListener('click', () => document.getElementById('nav-links').classList.remove('open'));
-  });
+/* ── SCROLL REVEAL ── */
+const io = new IntersectionObserver(
+  entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }),
+  { threshold: 0.1 }
+);
+document.querySelectorAll('.rv').forEach(el => io.observe(el));
 </script>
 </body>
 </html>
